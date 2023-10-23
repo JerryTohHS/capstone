@@ -52,6 +52,10 @@ const OrdersPage = () => {
 
   if (isLoading || status === "loading") return "Loading...";
 
+  const sortedData = [...data].sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
+
   return (
     <div className="p-4 lg:px-20 xl:px-40">
       <table className="w-full border-separate border-spacing-3">
@@ -65,7 +69,7 @@ const OrdersPage = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item: OrderType) => (
+          {sortedData.map((item: OrderType) => (
             <tr
               className={`${
                 item.status === "Delivered" ? "bg-green-100" : "bg-red-100"
