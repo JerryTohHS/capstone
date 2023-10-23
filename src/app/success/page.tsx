@@ -1,4 +1,5 @@
 "use client";
+import { useCartStore } from "@/utils/store";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import ConfettiExplosion from "react-confetti-explosion";
@@ -7,6 +8,7 @@ const SuccessPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const payment_intent = searchParams.get("payment_intent");
+  const { clearCart } = useCartStore();
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -14,6 +16,7 @@ const SuccessPage = () => {
         await fetch(`http://localhost:3000/api/confirm/${payment_intent}`, {
           method: "PUT",
         });
+        clearCart();
         setTimeout(() => {
           router.push("/orders");
         }, 5000);
@@ -23,7 +26,7 @@ const SuccessPage = () => {
     };
 
     makeRequest();
-  }, [payment_intent, router]);
+  }, [payment_intent, router, clearCart]);
 
   return (
     <>
