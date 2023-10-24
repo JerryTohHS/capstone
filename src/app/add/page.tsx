@@ -112,11 +112,14 @@ const AddPage = () => {
         className="shadow-lg flex flex-wrap gap-4 p-8"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-4xl mb-4 text-red-300 font-bold">
+        <h1 className="text-4xl mb-4 text-green-600 font-bold">
           Add New Product
         </h1>
         <div className="w-full flex flex-col gap-2">
-          <label>Image</label>
+          <div className="flex flex-row items-center">
+            <img src="/upload.png" alt="" width="50" className="p-2" />
+            <label>Upload Image</label>
+          </div>
           <input
             className="ring-1 ring-red-200 p-2 rounded-sm"
             type="file"
@@ -147,6 +150,7 @@ const AddPage = () => {
             className="ring-1 ring-red-200 p-2 rounded-sm"
             type="number"
             name="price"
+            placeholder="Number Only"
           />
         </div>
         <div className="w-full flex flex-col gap-2">
@@ -161,7 +165,7 @@ const AddPage = () => {
         </div>
         <div className="w-full flex flex-col gap-2">
           <label>Options</label>
-          <div>
+          <div className="flex gap-2">
             <input
               onChange={changeOption}
               className="ring-1 ring-red-200 p-2 rounded-sm"
@@ -173,28 +177,31 @@ const AddPage = () => {
               onChange={changeOption}
               className="ring-1 ring-red-200 p-2 rounded-sm"
               type="number"
-              placeholder="Additional Price"
+              style={{ width: "300px" }}
+              placeholder="Additional Price (Number Only)"
               name="additionalPrice"
             />
-          </div>
-          <div
-            className="w-52 bg-green-600 text-white p-2"
-            onClick={() => setOptions((prev) => [...prev, option])}
-          >
-            Add Option
+            <div
+              className="w-52 bg-green-600 text-white p-2"
+              onClick={() => setOptions((prev) => [...prev, option])}
+            >
+              Add Option
+            </div>
           </div>
         </div>
-        <div>
-          {options.map((item) => (
+        <div className="flex flex-wrap gap-4 mt-2">
+          {options.map((opt) => (
             <div
-              className="ring-1 p-2 ring-red-500 rounded-md cursor-pointer"
-              key={item.title}
+              key={opt.title}
+              className="p-2 ring-1 rounded-md cursor-pointer ring-green-600 text-green-600"
               onClick={() =>
-                setOptions(options.filter((opt) => opt.title !== item.title))
+                setOptions((prev) =>
+                  prev.filter((item) => item.title !== opt.title)
+                )
               }
             >
-              <span>{item.title}</span>
-              <span>${item.additionalPrice}</span>
+              <span>{opt.title}</span>
+              <span className="text-xs"> (+ ${opt.additionalPrice})</span>
             </div>
           ))}
         </div>
