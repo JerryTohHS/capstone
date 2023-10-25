@@ -83,6 +83,16 @@ const AddPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (
+      !inputs.title ||
+      !inputs.desc ||
+      inputs.price === 0 ||
+      !inputs.catslug
+    ) {
+      toast.error("Please fill out all required fields*");
+      return;
+    }
+
     try {
       const url = await upload();
       const res = await fetch("http://localhost:3000/api/products", {
@@ -115,7 +125,7 @@ const AddPage = () => {
         <h1 className="text-4xl mb-4 text-green-600 font-bold">
           Add New Product
         </h1>
-        <div className="w-full flex flex-col gap-2">
+        <div className="w-full flex flex-col gap-2 text-red-500">
           <div className="flex flex-row items-center">
             <img src="/upload.png" alt="" width="50" className="p-2" />
             <label>Upload Image</label>
@@ -126,25 +136,27 @@ const AddPage = () => {
             onChange={handleChangeImg}
           />
         </div>
-        <div className="w-full flex flex-col gap-2">
-          <label>Title</label>
+        <div className="w-full flex flex-col gap-2 text-red-500">
+          <label>Title*</label>
           <input
             onChange={handleChange}
             className="ring-1 ring-red-200 p-2 rounded-sm"
             type="text"
             name="title"
+            placeholder="Title"
           />
         </div>
-        <div className="w-full flex flex-col gap-2">
-          <label>Description</label>
+        <div className="w-full flex flex-col gap-2 text-red-500">
+          <label>Description*</label>
           <textarea
             className="ring-1 ring-red-200 p-2 rounded-sm"
             name="desc"
+            placeholder="Description"
             onChange={handleChange}
           />
         </div>
-        <div className="w-full flex flex-col gap-2">
-          <label>Price</label>
+        <div className="w-full flex flex-col gap-2 text-red-500">
+          <label>Price*</label>
           <input
             onChange={handleChange}
             className="ring-1 ring-red-200 p-2 rounded-sm"
@@ -153,8 +165,8 @@ const AddPage = () => {
             placeholder="Number Only"
           />
         </div>
-        <div className="w-full flex flex-col gap-2">
-          <label>Category</label>
+        <div className="w-full flex flex-col gap-2 text-red-500">
+          <label>Category*</label>
           <input
             onChange={handleChange}
             className="ring-1 ring-red-200 p-2 rounded-sm"
@@ -163,7 +175,7 @@ const AddPage = () => {
             placeholder="pratas / others / drinks"
           />
         </div>
-        <div className="w-full flex flex-col gap-2">
+        <div className="w-full flex flex-col gap-2 text-red-500">
           <label>Options</label>
           <div className="flex gap-2">
             <input
