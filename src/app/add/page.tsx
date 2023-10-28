@@ -83,13 +83,44 @@ const AddPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Validate the form fields
     if (
       !inputs.title ||
       !inputs.desc ||
       inputs.price === 0 ||
       !inputs.catslug
     ) {
-      toast.error("Please fill out all required fields*");
+      if (!inputs.title) {
+        document.getElementsByName("title")[0].classList.add("border-red-500");
+      } else {
+        document
+          .getElementsByName("title")[0]
+          .classList.remove("border-red-500");
+      }
+      if (!inputs.desc) {
+        document.getElementsByName("desc")[0].classList.add("border-red-500");
+      } else {
+        document
+          .getElementsByName("desc")[0]
+          .classList.remove("border-red-500");
+      }
+      if (!inputs.price) {
+        document.getElementsByName("price")[0].classList.add("border-red-500");
+      } else {
+        document
+          .getElementsByName("price")[0]
+          .classList.remove("border-red-500");
+      }
+      if (!inputs.catslug) {
+        document
+          .getElementsByName("catslug")[0]
+          .classList.add("border-red-500");
+      } else {
+        document
+          .getElementsByName("catslug")[0]
+          .classList.remove("border-red-500");
+      }
+      toast.error("Please fill out all required fields.");
       return;
     }
 
@@ -140,39 +171,51 @@ const AddPage = () => {
           <label>Title*</label>
           <input
             onChange={handleChange}
-            className="ring-1 ring-red-200 p-2 rounded-sm"
+            className={`ring-1 ring-red-200 p-2 rounded-sm ${
+              !inputs.title ? "border-red-500" : ""
+            }`}
             type="text"
             name="title"
             placeholder="Title"
+            required
           />
         </div>
         <div className="w-full flex flex-col gap-2 text-red-500">
           <label>Description*</label>
           <textarea
-            className="ring-1 ring-red-200 p-2 rounded-sm"
+            className={`ring-1 ring-red-200 p-2 rounded-sm ${
+              !inputs.desc ? "border-red-500" : ""
+            }`}
             name="desc"
             placeholder="Description"
             onChange={handleChange}
+            required
           />
         </div>
         <div className="w-full flex flex-col gap-2 text-red-500">
           <label>Price*</label>
           <input
             onChange={handleChange}
-            className="ring-1 ring-red-200 p-2 rounded-sm"
+            className={`ring-1 ring-red-200 p-2 rounded-sm ${
+              !inputs.price ? "border-red-500" : ""
+            }`}
             type="number"
             name="price"
             placeholder="Number Only"
+            required
           />
         </div>
         <div className="w-full flex flex-col gap-2 text-red-500">
           <label>Category*</label>
           <input
             onChange={handleChange}
-            className="ring-1 ring-red-200 p-2 rounded-sm"
+            className={`ring-1 ring-red-200 p-2 rounded-sm ${
+              !inputs.desc ? "border-red-500" : ""
+            }`}
             type="text"
             name="catslug"
             placeholder="pratas / others / drinks"
+            required
           />
         </div>
         <div className="w-full flex flex-col gap-2 text-red-500">
