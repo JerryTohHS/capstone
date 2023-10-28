@@ -126,14 +126,17 @@ const AddPage = () => {
 
     try {
       const url = await upload();
-      const res = await fetch("http://localhost:3000/api/products", {
-        method: "POST",
-        body: JSON.stringify({
-          img: url,
-          ...inputs,
-          options,
-        }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/products`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            img: url,
+            ...inputs,
+            options,
+          }),
+        }
+      );
 
       const data = await res.json();
       const productId = data.id;
