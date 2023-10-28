@@ -3,13 +3,19 @@ import Link from "next/link";
 import React from "react";
 
 const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/categories", {
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    throw new Error("Failed!");
+  try {
+    const res = await fetch("http:localhost:3000/api/categories", {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed with status: ${res.status}`);
+    }
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Rethrow the error for higher-level handling
   }
-  return res.json();
 };
 
 const MenuPage = async () => {
