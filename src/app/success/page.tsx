@@ -13,15 +13,25 @@ const SuccessPage = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        await fetch(`http://localhost:3000/api/confirm/${payment_intent}`, {
-          method: "PUT",
-        });
+        const response = await fetch(
+          `http://localhost:3000/api/confirm/${payment_intent}`,
+          {
+            method: "PUT",
+          }
+        );
+
+        if (!response.ok) {
+          // Handle the specific error condition, such as a non-200 status code
+          throw new Error(`Failed with status: ${response.status}`);
+        }
+
         clearCart();
         setTimeout(() => {
           router.push("/orders");
         }, 5000);
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        // Handle the error, log it, or display a user-friendly error message
+        console.error("Error making the request:", error);
       }
     };
 
