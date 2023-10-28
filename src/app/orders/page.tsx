@@ -20,7 +20,7 @@ const OrdersPage = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["orders"],
     queryFn: () =>
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`).then((res) =>
+      fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/orders`).then((res) =>
         res.json()
       ),
   });
@@ -29,7 +29,7 @@ const OrdersPage = () => {
 
   const mutation = useMutation({
     mutationFn: ({ id, status }: { id: string; status: string }) => {
-      return fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders/${id}`, {
+      return fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/orders/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

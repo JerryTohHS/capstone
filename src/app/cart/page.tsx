@@ -20,7 +20,7 @@ const CartPage = () => {
     } else {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/orders`,
+          `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/orders`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

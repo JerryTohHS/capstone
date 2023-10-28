@@ -127,7 +127,7 @@ const AddPage = () => {
     try {
       const url = await upload();
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/products`,
+        `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`,
         {
           method: "POST",
           body: JSON.stringify({

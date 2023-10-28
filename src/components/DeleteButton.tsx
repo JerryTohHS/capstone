@@ -19,7 +19,7 @@ const DeleteButton = ({ id }: { id: string }) => {
 
   const handleDelete = async () => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`,
+      `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${id}`,
       {
         method: "DELETE",
       }
