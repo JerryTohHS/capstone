@@ -4,23 +4,16 @@ import Link from "next/link";
 import React from "react";
 
 const getData = async (category: string) => {
-  try {
-    const res = await fetch(
-      `http://localhost:3000/api/products?cat=${category}`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error(`Failed with status: ${res.status}`);
+  const res = await fetch(
+    `http://localhost:3000/api/products?cat=${category}`,
+    {
+      cache: "no-store",
     }
-
-    return res.json();
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error; // Rethrow the error for higher-level handling
+  );
+  if (!res.ok) {
+    throw new Error("Failed!");
   }
+  return res.json();
 };
 
 type Props = {
