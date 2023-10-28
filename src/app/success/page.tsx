@@ -14,7 +14,7 @@ const SuccessPage = () => {
     const makeRequest = async () => {
       try {
         await fetch(
-          `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/confirm/${payment_intent}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/confirm/${payment_intent}`,
           {
             method: "PUT",
           }
