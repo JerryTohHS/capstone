@@ -126,7 +126,7 @@ const AddPage = () => {
 
     try {
       const url = await upload();
-      const res = await fetch("http://127.0.0.1:3000/api/products", {
+      const res = await fetch("http://localhost:3000/api/products", {
         method: "POST",
         body: JSON.stringify({
           img: url,
